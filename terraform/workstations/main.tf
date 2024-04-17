@@ -21,12 +21,12 @@ data "terraform_remote_state" "network" {
   backend = "gcs"
   config = {
     bucket = var.state_bucket
-    prefix  = "terraform/network/state"
+    prefix = "terraform/network/state"
   }
 }
 
 resource "google_workstations_workstation_cluster" "simple" {
-  provider = google-beta
+  provider               = google-beta
   workstation_cluster_id = "simple"
   network                = data.terraform_remote_state.network.outputs.network_id
   subnetwork             = data.terraform_remote_state.network.outputs.subnet_id
@@ -42,12 +42,12 @@ resource "google_workstations_workstation_cluster" "simple" {
 }
 
 resource "google_workstations_workstation_config" "simple" {
-  provider = google-beta
+  provider               = google-beta
   workstation_config_id  = "simple"
   workstation_cluster_id = google_workstations_workstation_cluster.simple.workstation_cluster_id
-  location                    = local.region
+  location               = local.region
 
-  idle_timeout = "600s"
+  idle_timeout    = "600s"
   running_timeout = "21600s"
 
   #replica_zones = ["us-central1-a", "us-central1-b"]
@@ -85,11 +85,11 @@ resource "google_workstations_workstation_config" "simple" {
 }
 
 resource "google_workstations_workstation" "simple" {
-  provider = google-beta
+  provider               = google-beta
   workstation_id         = "simple-workstation"
   workstation_config_id  = google_workstations_workstation_config.simple.workstation_config_id
   workstation_cluster_id = google_workstations_workstation_cluster.simple.workstation_cluster_id
-  location                    = local.region
+  location               = local.region
 
   labels = {
     "label" = "key"
@@ -105,12 +105,12 @@ resource "google_workstations_workstation" "simple" {
 }
 
 resource "google_workstations_workstation_config" "base" {
-  provider = google-beta
+  provider               = google-beta
   workstation_config_id  = "base"
   workstation_cluster_id = google_workstations_workstation_cluster.simple.workstation_cluster_id
-  location                    = local.region
+  location               = local.region
 
-  idle_timeout = "600s"
+  idle_timeout    = "600s"
   running_timeout = "21600s"
 
   #replica_zones = ["us-central1-a", "us-central1-b"]
@@ -148,11 +148,11 @@ resource "google_workstations_workstation_config" "base" {
 }
 
 resource "google_workstations_workstation" "base" {
-  provider = google-beta
+  provider               = google-beta
   workstation_id         = "base-workstation"
   workstation_config_id  = google_workstations_workstation_config.base.workstation_config_id
   workstation_cluster_id = google_workstations_workstation_cluster.simple.workstation_cluster_id
-  location                    = local.region
+  location               = local.region
 
   labels = {
     "label" = "key"
