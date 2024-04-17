@@ -21,20 +21,21 @@ locals {
 resource "google_workstations_workstation_config" "simple" {
   provider               = google-beta
   workstation_config_id  = "simple"
-  workstation_cluster_id = google_workstations_workstation_cluster.simple.workstation_cluster_id
+  workstation_cluster_id = google_workstations_workstation_cluster.default.workstation_cluster_id
   location               = local.region
 
   idle_timeout    = "600s"
   running_timeout = "21600s"
 
-  #replica_zones = ["us-central1-a", "us-central1-b"]
-  annotations = {
-    label-one = "value-one"
-  }
+  # replica_zones = ["us-central1-a", "us-central1-b"]
 
-  labels = {
-    "label" = "key"
-  }
+  # annotations = {
+  #   label-one = "value-one"
+  # }
+
+  # labels = {
+  #   "label" = "key"
+  # }
 
   host {
     gce_instance {
@@ -45,10 +46,10 @@ resource "google_workstations_workstation_config" "simple" {
   }
   container {
     image = "us-central1-docker.pkg.dev/cloud-workstations-images/predefined/code-oss:latest" # this is the default
-    env = {
-      NAME = "FOO"
-      BABE = "bar"
-    }
+    # env = {
+    #   NAME = "FOO"
+    #   BABE = "bar"
+    # }
   }
   persistent_directories {
     mount_path = "/home"
@@ -66,18 +67,18 @@ resource "google_workstations_workstation" "simple" {
   provider               = google-beta
   workstation_id         = "simple-workstation-${count.index}"
   workstation_config_id  = google_workstations_workstation_config.simple.workstation_config_id
-  workstation_cluster_id = google_workstations_workstation_cluster.simple.workstation_cluster_id
+  workstation_cluster_id = google_workstations_workstation_cluster.default.workstation_cluster_id
   location               = local.region
 
-  labels = {
-    "label" = "key"
-  }
+  # env = {
+  #   name = "foo"
+  # }
 
-  env = {
-    name = "foo"
-  }
+  # annotations = {
+  #   label-one = "value-one"
+  # }
 
-  annotations = {
-    label-one = "value-one"
-  }
+  # labels = {
+  #   "label" = "key"
+  # }
 }

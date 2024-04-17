@@ -25,144 +25,18 @@ data "terraform_remote_state" "network" {
   }
 }
 
-resource "google_workstations_workstation_cluster" "simple" {
+resource "google_workstations_workstation_cluster" "default" {
   provider               = google-beta
-  workstation_cluster_id = "simple"
+  workstation_cluster_id = "default"
   network                = data.terraform_remote_state.network.outputs.network_id
   subnetwork             = data.terraform_remote_state.network.outputs.subnet_id
   location               = local.region
 
-  labels = {
-    "label" = "key"
-  }
+  # annotations = {
+  #   label-one = "value-one"
+  # }
 
-  annotations = {
-    label-one = "value-one"
-  }
-}
-
-resource "google_workstations_workstation_config" "simple" {
-  provider               = google-beta
-  workstation_config_id  = "simple"
-  workstation_cluster_id = google_workstations_workstation_cluster.simple.workstation_cluster_id
-  location               = local.region
-
-  idle_timeout    = "600s"
-  running_timeout = "21600s"
-
-  #replica_zones = ["us-central1-a", "us-central1-b"]
-  annotations = {
-    label-one = "value-one"
-  }
-
-  labels = {
-    "label" = "key"
-  }
-
-  host {
-    gce_instance {
-      machine_type                = "e2-standard-4"
-      boot_disk_size_gb           = 35
-      disable_public_ip_addresses = true
-    }
-  }
-  container {
-    image = "us-central1-docker.pkg.dev/cloud-workstations-images/predefined/code-oss:latest" # this is the default
-    env = {
-      NAME = "FOO"
-      BABE = "bar"
-    }
-  }
-  persistent_directories {
-    mount_path = "/home"
-    gce_pd {
-      size_gb        = 200
-      fs_type        = "ext4"
-      disk_type      = "pd-standard"
-      reclaim_policy = "DELETE"
-    }
-  }
-}
-
-resource "google_workstations_workstation" "simple" {
-  provider               = google-beta
-  workstation_id         = "simple-workstation"
-  workstation_config_id  = google_workstations_workstation_config.simple.workstation_config_id
-  workstation_cluster_id = google_workstations_workstation_cluster.simple.workstation_cluster_id
-  location               = local.region
-
-  labels = {
-    "label" = "key"
-  }
-
-  env = {
-    name = "foo"
-  }
-
-  annotations = {
-    label-one = "value-one"
-  }
-}
-
-resource "google_workstations_workstation_config" "base" {
-  provider               = google-beta
-  workstation_config_id  = "base"
-  workstation_cluster_id = google_workstations_workstation_cluster.simple.workstation_cluster_id
-  location               = local.region
-
-  idle_timeout    = "600s"
-  running_timeout = "21600s"
-
-  #replica_zones = ["us-central1-a", "us-central1-b"]
-  annotations = {
-    label-one = "value-one"
-  }
-
-  labels = {
-    "label" = "key"
-  }
-
-  host {
-    gce_instance {
-      machine_type                = "e2-standard-4"
-      boot_disk_size_gb           = 35
-      disable_public_ip_addresses = true
-    }
-  }
-  container {
-    image = "us-central1-docker.pkg.dev/cloud-workstations-images/predefined/base:latest"
-    env = {
-      NAME = "FOO"
-      BABE = "bar"
-    }
-  }
-  persistent_directories {
-    mount_path = "/home"
-    gce_pd {
-      size_gb        = 200
-      fs_type        = "ext4"
-      disk_type      = "pd-standard"
-      reclaim_policy = "DELETE"
-    }
-  }
-}
-
-resource "google_workstations_workstation" "base" {
-  provider               = google-beta
-  workstation_id         = "base-workstation"
-  workstation_config_id  = google_workstations_workstation_config.base.workstation_config_id
-  workstation_cluster_id = google_workstations_workstation_cluster.simple.workstation_cluster_id
-  location               = local.region
-
-  labels = {
-    "label" = "key"
-  }
-
-  env = {
-    name = "foo"
-  }
-
-  annotations = {
-    label-one = "value-one"
-  }
+  # labels = {
+  #   "label" = "key"
+  # }
 }
