@@ -1,6 +1,7 @@
 # Using Google Cloud Workstations for SciML
 
-## Rough notes on usage for now
+
+## Workstations Usage - rough notes
 
 Clone this repo into somewhere like Cloudshell.  Need:
 - `gcloud` to be already authenticated
@@ -52,6 +53,37 @@ We'll have to find some workarounds.  Having the managed control plane
 tutorial.  For now, this is what we're doing.
 
 ### Launch and use workstations
+
+TODO
+
+
+### Clean up after yourself
+
+This stuff costs money.
+
+TODO
+
+
+## Workbenches Usage - rough notes
+
+Much of this is same as above... you can use the same project.
+Setup and create the network stuff, then jump down to here:
+
+### Create a workbenches
+
+Enable the workbenches service
+```
+gcloud services enable notebooks.googleapis.com
+```
+
+Change to `terraform/workbenches` and
+```
+terraform init -backend-config ../backend.conf
+terraform plan
+terraform apply
+```
+
+### Launch and use workbenches
 
 TODO
 
