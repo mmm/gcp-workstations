@@ -32,6 +32,11 @@ terraform apply
 
 ### Create a workstations cluster and some example workstations
 
+Enable the workstations service
+```
+gcloud services enable workstations.googleapis.com
+```
+
 Change to `terraform/workstations` and
 ```
 terraform init -backend-config ../backend.conf
