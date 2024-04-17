@@ -15,4 +15,4 @@
 # limitations under the License.
 #
 export GOOGLE_CLOUD_PROJECT="my-cool-project-name"
-export TF_STATE_BUCKET="my-cool-bucket-name"
+export TF_VAR_state_bucket="my-cool-bucket-name"
