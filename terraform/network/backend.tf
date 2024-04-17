@@ -15,6 +15,6 @@
 
 terraform {
   backend "gcs" {
-    prefix  = "terraform/network/state"
+    prefix = "terraform/network/state"
   }
 }

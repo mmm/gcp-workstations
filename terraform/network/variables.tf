@@ -14,25 +14,21 @@
 # limitations under the License.
 
 variable "region" {
+  type = string
   default = "us-central1"
 }
 
-variable "zone" {
-  default = "us-central1-f"
-}
-
-variable "tags" {
-  default = []
-}
-
 variable "network" {
+  type = string
   default = "tutorial"
 }
 
 variable "subnet" {
+  type = string
   default = "tutorial"
 }
 
 variable "cidr" {
+  type = string
   default = "10.2.1.0/24"
 }
