@@ -57,12 +57,6 @@ tutorial.  For now, this is what we're doing.
 TODO
 
 
-### Clean up after yourself
-
-This stuff costs money.
-
-TODO
-
 
 ## Workbenches Usage - rough notes
 
@@ -88,7 +82,8 @@ terraform apply
 TODO
 
 
-### Clean up after yourself
+
+## Clean up after yourself
 
 This stuff costs money.
 

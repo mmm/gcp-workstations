@@ -39,7 +39,7 @@ data "google_compute_default_service_account" "default" {}
 
 resource "google_workbench_instance" "workbench" {
   count    = local.workbench_count
-  name     = "workbench-${count.index + 1}"
+  name     = "workbench-${count.index}"
   location = var.zone
 
   gce_setup {
@@ -105,13 +105,3 @@ resource "google_workbench_instance" "workbench" {
   desired_state = "ACTIVE"
 
 }
-
-# resource "google_workbench_instance_iam_binding" "binding" {
-#   project = google_workbench_instance.workbench[0].project
-#   location = google_workbench_instance.workbench[0].location
-#   name = google_workbench_instance.workbench[0].name
-#   role = "roles/notebooks.admin"
-#   members = [
-#     "serviceAccount:${data.google_compute_default_service_account.default.email}",
-#   ]
-# }
