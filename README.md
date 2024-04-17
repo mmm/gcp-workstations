@@ -63,9 +63,9 @@ TODO
 Much of this is same as above... you can use the same project.
 Setup and create the network stuff, then jump down to here:
 
-### Create a workbenches
+### Create a Vertex AI Workbench instance
 
-Enable the workbenches service
+Enable the notebooks service
 ```
 gcloud services enable notebooks.googleapis.com
 ```
@@ -77,7 +77,27 @@ terraform plan
 terraform apply
 ```
 
-### Launch and use workbenches
+### Launch and use a workbench instance
+
+TODO
+
+
+
+## Worker Usage - rough notes
+
+Much of this is same as above... you can use the same project.
+Setup and create the network stuff, then jump down to here:
+
+### Create a worker instance
+
+Change to `terraform/workers` and
+```
+terraform init -backend-config ../backend.conf
+terraform plan
+terraform apply
+```
+
+### Launch and use a worker
 
 TODO
 
